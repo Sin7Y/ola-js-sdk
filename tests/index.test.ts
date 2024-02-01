@@ -147,7 +147,7 @@ describe("Wallet Test", () => {
     console.log("invoke txHash", txHash);
   });
 
-  sleep(1000);
+  sleep(6000);
 
   it("call()", async () => {
     const olaWallet = await generateAccount();
