@@ -115,46 +115,46 @@ describe("ABI Encoder Test", () => {
   });
 });
 
-// describe("Wallet Test", () => {
-//   it("Create Account", async () => {
-//     const olaWallet = await generateAccount();
-//     expect(olaWallet.signer.publicKey).to.eq(
-//       "0x4dfe4a76a9260db664a4b7c8a3b5293364507c3857e9457ac84f9ca36a9c9c7c4243c6405ca2c8a5b1e62766dc77f2f90ff54e70bb49995d28fb8f98782e005c"
-//     );
-//     expect(olaWallet.address).to.eq(
-//       "0xc32eff4be49142ea8ec271e65126a2cc4f227ebed16b62a7388222bd5afb3e0f"
-//     );
-//   });
+describe("Wallet Test", () => {
+  it("Create Account", async () => {
+    const olaWallet = await generateAccount();
+    expect(olaWallet.signer.publicKey).to.eq(
+      "0x4dfe4a76a9260db664a4b7c8a3b5293364507c3857e9457ac84f9ca36a9c9c7c4243c6405ca2c8a5b1e62766dc77f2f90ff54e70bb49995d28fb8f98782e005c"
+    );
+    expect(olaWallet.address).to.eq(
+      "0xc32eff4be49142ea8ec271e65126a2cc4f227ebed16b62a7388222bd5afb3e0f"
+    );
+  });
 
-//   it("setPubKey()", async () => {
-//     try {
-//       const olaWallet = await generateAccount();
-//       const txHash = await olaWallet.setPubKey();
-//       console.log(txHash);
-//     } catch (error: any) {
-//       console.log(error.message);
-//     }
-//   });
+  it("setPubKey()", async () => {
+    try {
+      const olaWallet = await generateAccount();
+      const txHash = await olaWallet.setPubKey();
+      console.log(txHash);
+    } catch (error: any) {
+      console.log(error.message);
+    }
+  });
 
-//   const contracAddress = "0x26d5e4afcc2c1dcec2385e164e40d2bcb14384e9e74f46d4b9d626654d13bcf9";
-//   it("invoke()", async () => {
-//     const olaWallet = await generateAccount();
-//     const abi = [
-//       { name: "set", type: "function", inputs: [{ name: "d", type: "u32" }], outputs: [] },
-//     ];
-//     const params = [{ U32: 2000 }];
-//     const txHash = await olaWallet.invoke(abi, "set(u32)", contracAddress, params);
-//     console.log("invoke txHash", txHash);
-//   });
+  const contracAddress = "0x26d5e4afcc2c1dcec2385e164e40d2bcb14384e9e74f46d4b9d626654d13bcf9";
+  it("invoke()", async () => {
+    const olaWallet = await generateAccount();
+    const abi = [
+      { name: "set", type: "function", inputs: [{ name: "d", type: "u32" }], outputs: [] },
+    ];
+    const params = [{ U32: 2000 }];
+    const txHash = await olaWallet.invoke(abi, "set(u32)", contracAddress, params);
+    console.log("invoke txHash", txHash);
+  });
 
-//   sleep(6000);
+  sleep(6000);
 
-//   it("call()", async () => {
-//     const olaWallet = await generateAccount();
-//     const abi = [
-//       { name: "get", type: "function", inputs: [], outputs: [{ name: "", type: "u32" }] },
-//     ];
-//     let result = await olaWallet.call<number>(abi, "get()", contracAddress, []);
-//     expect(result).eq(2000);
-//   });
-// });
+  it("call()", async () => {
+    const olaWallet = await generateAccount();
+    const abi = [
+      { name: "get", type: "function", inputs: [], outputs: [{ name: "", type: "u32" }] },
+    ];
+    let result = await olaWallet.call<number>(abi, "get()", contracAddress, []);
+    expect(result).eq(2000);
+  });
+});
