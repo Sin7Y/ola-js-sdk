@@ -8,7 +8,7 @@
     "test": "mocha --timeout 60000",
     "build": "rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "watch": "rollup -w -c rollup.config.ts --configPlugin @rollup/plugin-typescript",
-    "release": "./build.sh && np --any-branch"
+    "release": "./build.sh && np --any-branch --no-tests"
   },
   "keywords": [
     "crypto",
@@ -43,8 +43,5 @@
   },
   "publishConfig": {
     "access": "public"
-  },
-  "np": {
-    "tests": false
   }
 }
