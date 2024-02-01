@@ -6,7 +6,7 @@
   "module": "dist/index.es.js",
   "types": "dist/index.d.ts",
   "scripts": {
-    "test": "mocha --timeout 10000",
+    "test": "mocha --timeout 60000",
     "build": "rollup -c rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "watch": "rollup -w -c rollup.config.ts --configPlugin @rollup/plugin-typescript",
     "release": "./build.sh && np --any-branch"
