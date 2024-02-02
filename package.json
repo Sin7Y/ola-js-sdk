@@ -42,6 +42,7 @@
   "peerDependencies": {
     "ethers": "^6.10.0"
   },
+  "type": "module",
   "publishConfig": {
     "access": "public"
   }
