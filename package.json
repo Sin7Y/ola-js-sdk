@@ -35,7 +35,7 @@
   },
   "dependencies": {
     "@sin7y/ola-abi-wasm": "^0.0.3",
-    "@sin7y/ola-crypto": "^0.0.3",
+    "@sin7y/ola-crypto": "^0.0.4",
     "axios": "^1.6.7",
     "ethers": "^6.10.0"
   },

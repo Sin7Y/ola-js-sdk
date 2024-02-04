@@ -25,7 +25,7 @@ export function decodeAbi(abi: any[], method: string, data: BigUint64Array) {
 }
 
 export function poseidonHash(data: Uint8Array) {
-  console.log("poseidon_u64_bytes_for_bytes_wrapper", poseidon_u64_bytes_for_bytes_wrapper);
+  console.log("poseidon_u64_bytes_for_bytes_wrapper", data);
   const result = poseidon_u64_bytes_for_bytes_wrapper(data);
   return Uint8Array.from(result);
 }
