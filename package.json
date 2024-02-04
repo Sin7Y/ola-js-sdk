@@ -40,7 +40,9 @@
     "ethers": "^6.10.0"
   },
   "peerDependencies": {
-    "ethers": "^6.10.0"
+    "ethers": "^6.10.0",
+    "@sin7y/ola-abi-wasm": "^0.0.3",
+    "@sin7y/ola-crypto": "^0.0.4"
   },
   "publishConfig": {
     "access": "public"
