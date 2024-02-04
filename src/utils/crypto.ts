@@ -1,6 +1,5 @@
 import { toBeArray, toBigInt } from "ethers";
-import type { BigNumberish, BytesLike } from "ethers";
-import { poseidon_u64_bytes_for_bytes_wrapper } from "@sin7y/ola-crypto";
+import type { BigNumberish } from "ethers";
 
 /**
  * BigNumberish / Uint8Array -> BigUint64Array
@@ -44,9 +43,4 @@ export function toUint8Array(value: BigUint64Array | bigint[] | bigint) {
     dataView.setBigUint64(i * 8, array[i], false);
   }
   return new Uint8Array(buffer);
-}
-
-export function poseidonHash(data: Uint8Array) {
-  const result = poseidon_u64_bytes_for_bytes_wrapper(data);
-  return Uint8Array.from(result);
 }
