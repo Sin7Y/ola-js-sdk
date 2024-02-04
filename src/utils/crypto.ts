@@ -29,15 +29,6 @@ export function isValidOlaKey(key: string) {
 }
 
 /**
- * convert HexString address -> bigint[]
- * @param address
- * @returns
- */
-export function toBigintArray(address: BytesLike) {
-  return Array.from(toUint64Array(address));
-}
-
-/**
  * BigUint64Array -> Uint8Array
  * @param arr
  * @returns
@@ -56,5 +47,6 @@ export function toUint8Array(value: BigUint64Array | bigint[] | bigint) {
 }
 
 export function poseidonHash(data: Uint8Array) {
-  return Uint8Array.from(poseidon_u64_bytes_for_bytes_wrapper(data));
+  const result = poseidon_u64_bytes_for_bytes_wrapper(data);
+  return Uint8Array.from(result);
 }

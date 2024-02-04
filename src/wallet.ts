@@ -6,7 +6,6 @@ import {
   createEntrypointCalldata,
   encodeAbi,
   decodeAbi,
-  toBigintArray,
   toUint64Array,
   toUint8Array,
   capitalize,
@@ -91,7 +90,7 @@ export class OlaWallet {
       ACCOUNT_ABI,
       "setPubkey(fields)",
       hexlify(toUint8Array(DEFAULT_ACCOUNT_ADDRESS)),
-      [{ Fields: toBigintArray(this.signer.publicKey) }],
+      [{ Fields: OlaAddress.toBigintArray(this.signer.publicKey) }],
       { nonce: 0 }
     );
   }

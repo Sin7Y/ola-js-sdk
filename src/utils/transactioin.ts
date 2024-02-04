@@ -17,8 +17,8 @@ export function createEntrypointCalldata(
   const params = [
     {
       Tuple: [
-        ["address", { Address: Array.from(OlaAddress.toBigintArray(from)) }],
-        ["address", { Address: Array.from(OlaAddress.toBigintArray(to)) }],
+        ["address", { Address: OlaAddress.toBigintArray(from) }],
+        ["address", { Address: OlaAddress.toBigintArray(to) }],
         ["fields", { Fields: calldata }],
         ["fields", { Fields: codes }],
       ],
