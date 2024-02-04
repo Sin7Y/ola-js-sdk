@@ -1,7 +1,7 @@
 import { ENTRYPOINT_ADDRESS } from "../constants";
 import { OlaSigner } from "../signer";
-import { encodeAbi } from "./abi";
-import { toUint64Array, toUint8Array, poseidonHash } from "./crypto";
+import { encodeAbi, poseidonHash } from "./abi";
+import { toUint64Array, toUint8Array } from "./crypto";
 import { L2Tx, TransactionRequest, TransactionType } from "../types";
 import { ethers, getBytes, hexlify, toBeArray } from "ethers";
 import { ENTRYPOINT_ABI } from "../abi/entrypoint";
