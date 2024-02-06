@@ -1,5 +1,5 @@
 import { toBeArray, toBigInt } from "ethers";
-import type { BigNumberish, BytesLike } from "ethers";
+import type { BigNumberish } from "ethers";
 import { poseidon_u64_bytes_for_bytes_wrapper } from "@sin7y/ola-crypto";
 
 /**
@@ -29,15 +29,6 @@ export function isValidOlaKey(key: string) {
 }
 
 /**
- * convert HexString address -> bigint[]
- * @param address
- * @returns
- */
-export function toBigintArray(address: BytesLike) {
-  return Array.from(toUint64Array(address));
-}
-
-/**
  * BigUint64Array -> Uint8Array
  * @param arr
  * @returns
@@ -56,5 +47,12 @@ export function toUint8Array(value: BigUint64Array | bigint[] | bigint) {
 }
 
 export function poseidonHash(data: Uint8Array) {
-  return Uint8Array.from(poseidon_u64_bytes_for_bytes_wrapper(data));
+  let bytes = data;
+  if (bytes.length % 8 !== 0) {
+    const remain = 8 - (bytes.length % 8);
+    const padding = new Uint8Array(remain).fill(0);
+    bytes = new Uint8Array([...padding, ...bytes]);
+  }
+  const result = poseidon_u64_bytes_for_bytes_wrapper(bytes);
+  return Uint8Array.from(result);
 }

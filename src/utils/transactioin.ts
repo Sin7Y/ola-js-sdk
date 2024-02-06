@@ -1,7 +1,8 @@
 import { ENTRYPOINT_ADDRESS } from "../constants";
 import { OlaSigner } from "../signer";
 import { encodeAbi } from "./abi";
-import { toUint64Array, toUint8Array, poseidonHash } from "./crypto";
+import { poseidonHash } from "./crypto";
+import { toUint64Array, toUint8Array } from "./crypto";
 import { L2Tx, TransactionRequest, TransactionType } from "../types";
 import { ethers, getBytes, hexlify, toBeArray } from "ethers";
 import { ENTRYPOINT_ABI } from "../abi/entrypoint";
@@ -17,8 +18,8 @@ export function createEntrypointCalldata(
   const params = [
     {
       Tuple: [
-        ["address", { Address: Array.from(OlaAddress.toBigintArray(from)) }],
-        ["address", { Address: Array.from(OlaAddress.toBigintArray(to)) }],
+        ["address", { Address: OlaAddress.toBigintArray(from) }],
+        ["address", { Address: OlaAddress.toBigintArray(to) }],
         ["fields", { Fields: calldata }],
         ["fields", { Fields: codes }],
       ],

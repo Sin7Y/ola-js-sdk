@@ -1,6 +1,6 @@
 {
   "name": "@sin7y/ola-js-sdk",
-  "version": "0.0.4",
+  "version": "0.0.10",
   "description": "JavaScript SDK for ola.",
   "main": "dist/index.cjs.js",
   "module": "dist/index.es.js",
@@ -35,11 +35,13 @@
   },
   "dependencies": {
     "@sin7y/ola-abi-wasm": "^0.0.3",
-    "@sin7y/ola-crypto": "^0.0.3",
+    "@sin7y/ola-crypto": "^0.0.4",
     "axios": "^1.6.7",
     "ethers": "^6.10.0"
   },
   "peerDependencies": {
+    "@sin7y/ola-abi-wasm": "^0.0.3",
+    "@sin7y/ola-crypto": "^0.0.4",
     "ethers": "^6.10.0"
   },
   "type": "module",
