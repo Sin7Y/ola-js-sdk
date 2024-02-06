@@ -213,10 +213,10 @@
   dependencies:
     any-observable "^0.3.0"
 
-"@sin7y/ola-abi-wasm@^0.0.3":
-  version "0.0.3"
-  resolved "https://registry.yarnpkg.com/@sin7y/ola-abi-wasm/-/ola-abi-wasm-0.0.3.tgz#04c1bb4aaea8fd734820befc227c53b9b3577cfe"
-  integrity sha512-X9srOuR4YvsaGb3oFPO1cx5uqw80LxBhIaRHv/GMV2UnzY0lJSE8O6XzVCToG3HpYIxJfgBUXEmMQsGMQ+QAzQ==
+"@sin7y/ola-abi-wasm@^0.0.4":
+  version "0.0.4"
+  resolved "https://registry.yarnpkg.com/@sin7y/ola-abi-wasm/-/ola-abi-wasm-0.0.4.tgz#091b0e6a4b86816d04a0e7f1c31562a47a9927f8"
+  integrity sha512-M+TCia4urxI4E6ghEtw0SY7DMNwGmGMX1kXQRqWj8VdJDNqcaM1Fo/SDz89mEvr/Jkiti9dd91lShqb4eohQvA==
 
 "@sin7y/ola-crypto@^0.0.4":
   version "0.0.4"

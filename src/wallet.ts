@@ -79,12 +79,15 @@ export class OlaWallet {
     const tx = await this.provider.request<string>("ola_callTransaction", {
       call_request,
     });
-    console.log("tx result", tx);
     const decoded = decodeAbi(abi, method, toUint64Array(tx));
-    console.log("decode result", decoded);
+
     const outputs = decoded[1][0];
     const outputType = outputs.param.type;
-    const outputsValue = outputs.value[capitalize(outputType)];
+    // @todo: multi outputs
+    let outputsValue = outputs.value[capitalize(outputType)];
+    if (outputType === "fields") {
+      outputsValue = hexlify(toUint8Array(outputsValue as bigint[]));
+    }
     return outputsValue as T;
   }
 
