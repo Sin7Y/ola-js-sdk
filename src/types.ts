@@ -1,3 +1,5 @@
+export type DataHexString = string;
+
 export enum TransactionType {
   EIP712Transaction = 113,
   EIP1559Transaction = 2,
@@ -51,7 +53,7 @@ export interface L2Tx {
 }
 
 export interface CallResponse {
-  jsonrpc: string,
-  result: string,
-  id:number,
+  jsonrpc: string;
+  result: string;
+  id: number;
 }

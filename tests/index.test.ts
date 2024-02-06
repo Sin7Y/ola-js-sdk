@@ -160,7 +160,7 @@ describe("Wallet Test", () => {
       const aa = "0x0000000000000000000000000000000000000000000000000000000000008006";
       const params = [{ Address: Array.from(OlaAddress.toBigintArray(olaWallet.address)) }];
       let result = await olaWallet.call<string>(abi, "getPubkey(address)", aa, params);
-      console.log("result: ", result);
+      console.log("getPubKey", result);
     } catch (error: any) {
       console.log("decode error", error);
     }

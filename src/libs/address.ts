@@ -1,5 +1,5 @@
-import type { BigNumberish } from "ethers";
-import { toUint64Array } from "../utils/crypto";
+import { hexlify, type BigNumberish } from "ethers";
+import { toUint64Array, toUint8Array } from "../utils/crypto";
 
 export class OlaAddress {
   static toBigintArray(value: Uint8Array | BigNumberish) {
@@ -8,5 +8,9 @@ export class OlaAddress {
     const padArray = padCount > 0 ? new BigUint64Array(padCount).fill(0n) : null;
     const result = padArray ? new BigUint64Array([...padArray, ...bytes]) : bytes.slice(0, 4);
     return Array.from(result);
+  }
+
+  static toHexString(value: bigint[]) {
+    return hexlify(toUint8Array(value));
   }
 }

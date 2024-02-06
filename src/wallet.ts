@@ -8,12 +8,11 @@ import {
   decodeAbi,
   toUint64Array,
   toUint8Array,
-  capitalize,
   toBigintArray,
+  parseOutputs,
 } from "./utils";
 import { ACCOUNT_ABI } from "./abi";
-import { OlaAddress } from "./libs/address";
-import { TransactionType, CallResponse } from "./types";
+import { TransactionType } from "./types";
 
 const DEFAULT_RPC_URL = "/";
 
@@ -80,15 +79,7 @@ export class OlaWallet {
       call_request,
     });
     const decoded = decodeAbi(abi, method, toUint64Array(tx));
-
-    const outputs = decoded[1][0];
-    const outputType = outputs.param.type;
-    // @todo: multi outputs
-    let outputsValue = outputs.value[capitalize(outputType)];
-    if (outputType === "fields") {
-      outputsValue = hexlify(toUint8Array(outputsValue as bigint[]));
-    }
-    return outputsValue as T;
+    return parseOutputs(decoded[1][0]);
   }
 
   async setPubKey() {
