@@ -9,6 +9,7 @@ import {
   toUint64Array,
   toUint8Array,
   capitalize,
+  toBigintArray,
 } from "./utils";
 import { ACCOUNT_ABI } from "./abi";
 import { OlaAddress } from "./libs/address";
@@ -90,7 +91,7 @@ export class OlaWallet {
       ACCOUNT_ABI,
       "setPubkey(fields)",
       hexlify(toUint8Array(DEFAULT_ACCOUNT_ADDRESS)),
-      [{ Fields: OlaAddress.toBigintArray(this.signer.publicKey) }],
+      [{ Fields: toBigintArray(this.signer.publicKey) }],
       { nonce: 0 }
     );
   }

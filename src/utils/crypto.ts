@@ -1,5 +1,5 @@
 import { toBeArray, toBigInt } from "ethers";
-import type { BigNumberish } from "ethers";
+import type { BigNumberish, BytesLike } from "ethers";
 import { poseidon_u64_bytes_for_bytes_wrapper } from "@sin7y/ola-crypto";
 
 /**
@@ -55,4 +55,13 @@ export function poseidonHash(data: Uint8Array) {
   }
   const result = poseidon_u64_bytes_for_bytes_wrapper(bytes);
   return Uint8Array.from(result);
+}
+
+/**
+* convert HexString address -> bigint[]
+* @param address
+* @returns
+*/
+export function toBigintArray(address: BytesLike) {
+ return Array.from(toUint64Array(address));
 }
