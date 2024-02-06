@@ -2,7 +2,7 @@ import { hexlify, toUtf8Bytes } from "ethers";
 import { encode_input_from_js, decode_output_from_js } from "@sin7y/ola-abi-wasm";
 import { toUint8Array } from "./crypto";
 import type { DataHexString } from "../types";
-import { capitalize } from ".";
+import { capitalize } from "./normal";
 import { OlaAddress } from "../libs";
 
 function getAbiBytes(abi: any[]) {
