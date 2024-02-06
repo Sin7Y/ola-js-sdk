@@ -44,7 +44,6 @@
     "@sin7y/ola-crypto": "^0.0.4",
     "ethers": "^6.10.0"
   },
-  "type": "module",
   "publishConfig": {
     "access": "public"
   }

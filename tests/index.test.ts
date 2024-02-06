@@ -23,97 +23,97 @@ function sleep(time: number) {
   });
 }
 
-// describe("ABI Encoder Test", () => {
-//   it("Encode ABI", async () => {
-//     const abi = [
-//       {
-//         name: "createBook",
-//         type: "function",
-//         inputs: [
-//           { name: "id", type: "u32", internalType: "u32" },
-//           { name: "name", type: "string", internalType: "string" },
-//         ],
-//         outputs: [
-//           {
-//             name: "",
-//             type: "tuple",
-//             internalType: "struct BookExample.Book",
-//             components: [
-//               { name: "book_id", type: "u32", internalType: "u32" },
-//               { name: "book_name", type: "string", internalType: "string" },
-//             ],
-//           },
-//         ],
-//       },
-//     ];
-//     const method = "createBook(u32,string)";
-//     const params = [{ U32: 60 }, { String: "olavm" }];
-//     const result = await encodeAbi(abi, method, params);
-//     expect(result).to.deep.eq(
-//       new BigUint64Array([60n, 5n, 111n, 108n, 97n, 118n, 109n, 7n, 120553111n])
-//     );
-//   });
+describe("ABI Encoder Test", () => {
+  it("Encode ABI", async () => {
+    const abi = [
+      {
+        name: "createBook",
+        type: "function",
+        inputs: [
+          { name: "id", type: "u32", internalType: "u32" },
+          { name: "name", type: "string", internalType: "string" },
+        ],
+        outputs: [
+          {
+            name: "",
+            type: "tuple",
+            internalType: "struct BookExample.Book",
+            components: [
+              { name: "book_id", type: "u32", internalType: "u32" },
+              { name: "book_name", type: "string", internalType: "string" },
+            ],
+          },
+        ],
+      },
+    ];
+    const method = "createBook(u32,string)";
+    const params = [{ U32: 60 }, { String: "olavm" }];
+    const result = await encodeAbi(abi, method, params);
+    expect(result).to.deep.eq(
+      new BigUint64Array([60n, 5n, 111n, 108n, 97n, 118n, 109n, 7n, 120553111n])
+    );
+  });
 
-//   it("Decode ABI", async () => {
-//     const abi = [
-//       {
-//         name: "getBookName",
-//         type: "function",
-//         inputs: [
-//           {
-//             name: "_book",
-//             type: "tuple",
-//             internalType: "struct BookExample.Book",
-//             components: [
-//               {
-//                 name: "book_id",
-//                 type: "u32",
-//                 internalType: "u32",
-//               },
-//               {
-//                 name: "book_name",
-//                 type: "string",
-//                 internalType: "string",
-//               },
-//             ],
-//           },
-//         ],
-//         outputs: [
-//           {
-//             name: "",
-//             type: "string",
-//             internalType: "string",
-//           },
-//         ],
-//       },
-//     ];
-//     const data = new BigUint64Array([5n, 104n, 101n, 108n, 108n, 111n, 6n]);
-//     const method = "getBookName((u32,string))";
-//     const result = await decodeAbi(abi, method, data);
-//     expect(result).to.deep.eq([
-//       {
-//         name: "getBookName",
-//         inputs: [
-//           {
-//             name: "_book",
-//             type: "tuple",
-//             components: [
-//               { name: "book_id", type: "u32" },
-//               { name: "book_name", type: "string" },
-//             ],
-//           },
-//         ],
-//         outputs: [{ name: "", type: "string" }],
-//       },
-//       [
-//         {
-//           param: { name: "", type: "string" },
-//           value: { String: "hello" },
-//         },
-//       ],
-//     ]);
-//   });
-// });
+  it("Decode ABI", async () => {
+    const abi = [
+      {
+        name: "getBookName",
+        type: "function",
+        inputs: [
+          {
+            name: "_book",
+            type: "tuple",
+            internalType: "struct BookExample.Book",
+            components: [
+              {
+                name: "book_id",
+                type: "u32",
+                internalType: "u32",
+              },
+              {
+                name: "book_name",
+                type: "string",
+                internalType: "string",
+              },
+            ],
+          },
+        ],
+        outputs: [
+          {
+            name: "",
+            type: "string",
+            internalType: "string",
+          },
+        ],
+      },
+    ];
+    const data = new BigUint64Array([5n, 104n, 101n, 108n, 108n, 111n, 6n]);
+    const method = "getBookName((u32,string))";
+    const result = await decodeAbi(abi, method, data);
+    expect(result).to.deep.eq([
+      {
+        name: "getBookName",
+        inputs: [
+          {
+            name: "_book",
+            type: "tuple",
+            components: [
+              { name: "book_id", type: "u32" },
+              { name: "book_name", type: "string" },
+            ],
+          },
+        ],
+        outputs: [{ name: "", type: "string" }],
+      },
+      [
+        {
+          param: { name: "", type: "string" },
+          value: { String: "hello" },
+        },
+      ],
+    ]);
+  });
+});
 
 describe("Wallet Test", () => {
   it("Create Account", async () => {
@@ -139,30 +139,30 @@ describe("Wallet Test", () => {
   it("getPubKey()", async () => {
     try {
       const olaWallet = await generateAccount();
-      const abi = [{
-        "name": "getPubkey",
-        "type": "function",
-        "inputs": [
-          {
-            "name": "_address",
-            "type": "address"
-          }
-        ],
-        "outputs": [
-          {
-            "name": "",
-            "type": "fields"
-          }
-        ]
-      }];
-      const aa = "0x0000000000000000000000000000000000000000000000000000000000008006";
-      const params = [
-        {Address: Array.from(OlaAddress.toBigintArray(olaWallet.address))}
+      const abi = [
+        {
+          name: "getPubkey",
+          type: "function",
+          inputs: [
+            {
+              name: "_address",
+              type: "address",
+            },
+          ],
+          outputs: [
+            {
+              name: "",
+              type: "fields",
+            },
+          ],
+        },
       ];
+      const aa = "0x0000000000000000000000000000000000000000000000000000000000008006";
+      const params = [{ Address: Array.from(OlaAddress.toBigintArray(olaWallet.address)) }];
       let result = await olaWallet.call<string>(abi, "getPubkey(address)", aa, params);
       console.log("result: ", result);
     } catch (error: any) {
-      console.log(error.message);
+      console.log("decode error", error);
     }
   });
 

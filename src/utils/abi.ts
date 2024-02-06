@@ -19,6 +19,7 @@ export function encodeAbi(abi: any[], method: string, params: Record<string, any
 }
 
 export function decodeAbi(abi: any[], method: string, data: BigUint64Array) {
+  // console.log("decodeAbi", getAbiBytes(abi), method, data);
   const result = decode_output_from_js(getAbiBytes(abi), method, data);
   return result;
 }
