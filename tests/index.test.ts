@@ -1,4 +1,4 @@
-import { encodeAbi, decodeAbi, OlaWallet, OlaAddress } from "../src";
+import { encodeAbi, decodeAbi, OlaWallet, verifySignature } from "../src";
 import { ethers } from "ethers";
 import { expect } from "chai";
 
@@ -136,35 +136,35 @@ describe("Wallet Test", () => {
   //     console.log(error.message);
   //   }
   // });
-  it("getPubKey()", async () => {
-    try {
-      const olaWallet = await generateAccount();
-      const abi = [
-        {
-          name: "getPubkey",
-          type: "function",
-          inputs: [
-            {
-              name: "_address",
-              type: "address",
-            },
-          ],
-          outputs: [
-            {
-              name: "",
-              type: "fields",
-            },
-          ],
-        },
-      ];
-      const aa = "0x0000000000000000000000000000000000000000000000000000000000008006";
-      const params = [{ Address: Array.from(OlaAddress.toBigintArray(olaWallet.address)) }];
-      let result = await olaWallet.call<string>(abi, "getPubkey(address)", aa, params);
-      console.log("getPubKey", result);
-    } catch (error: any) {
-      console.log("decode error", error);
-    }
-  });
+  // it("getPubKey()", async () => {
+  //   try {
+  //     const olaWallet = await generateAccount();
+  //     const abi = [
+  //       {
+  //         name: "getPubkey",
+  //         type: "function",
+  //         inputs: [
+  //           {
+  //             name: "_address",
+  //             type: "address",
+  //           },
+  //         ],
+  //         outputs: [
+  //           {
+  //             name: "",
+  //             type: "fields",
+  //           },
+  //         ],
+  //       },
+  //     ];
+  //     const aa = "0x0000000000000000000000000000000000000000000000000000000000008006";
+  //     const params = [{ Address: Array.from(OlaAddress.toBigintArray(olaWallet.address)) }];
+  //     let result = await olaWallet.call<string>(abi, "getPubkey(address)", aa, params);
+  //     console.log("getPubKey", result);
+  //   } catch (error: any) {
+  //     console.log("decode error", error);
+  //   }
+  // });
 
   const contracAddress = "0x6b2bce884dbab3b4a1ef0c7adc039a4ce93c4e291318218c9280f06bed052662";
   // it("invoke()", async () => {
@@ -193,4 +193,11 @@ describe("Wallet Test", () => {
   //     console.log("result: ", result);
   //   }
   // });
+
+  it("Test message", async () => {
+    const message = "Signed Message.";
+    const olaWallet = await generateAccount();
+    const signature = olaWallet.signer.signMessage(message);
+    expect(verifySignature(message, signature, olaWallet.address)).eq(true);
+  });
 });

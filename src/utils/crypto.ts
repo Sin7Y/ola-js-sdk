@@ -66,12 +66,3 @@ export function poseidonHash(data: Uint8Array) {
 export function toBigintArray(address: BytesLike) {
   return Array.from(toUint64Array(address));
 }
-
-export function hashMessage(message: Uint8Array | string): string {
-  if (typeof message === "string") {
-    message = toUtf8Bytes(message);
-  }
-  return keccak256(
-    concat([toUtf8Bytes(OlaMessagePrefix), toUtf8Bytes(String(message.length)), message])
-  );
-}

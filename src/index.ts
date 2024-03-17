@@ -12,5 +12,8 @@ export {
   toUint8Array,
   toUint64Array,
   poseidonHash,
+  // about signature
   hashMessage,
+  recoverAddress,
+  verifySignature,
 } from "./utils";
