@@ -1,5 +1,13 @@
 import { ethers, sha256, keccak256, toBeArray, SigningKey, BytesLike, hexlify } from "ethers";
-import { isValidOlaKey, l2txToTransactionRequest, poseidonHash, rlp_tx, toUint64Array, txRequestToBytes } from "./utils";
+import {
+  hashMessage,
+  isValidOlaKey,
+  l2txToTransactionRequest,
+  poseidonHash,
+  rlp_tx,
+  toUint64Array,
+  txRequestToBytes,
+} from "./utils";
 import { TransactionType, type L2Tx, type TransactionRequest } from "./types";
 import { ENTRYPOINT_ADDRESS } from "./constants";
 
@@ -32,7 +40,13 @@ export class OlaSigner {
     this.address = hexlify(hashBytes);
   }
 
-  getL2Tx(chain_id: number, from: string, nonce: number, calldata: Uint8Array, factory_deps: Array<Uint8Array> | null = null) {
+  getL2Tx(
+    chain_id: number,
+    from: string,
+    nonce: number,
+    calldata: Uint8Array,
+    factory_deps: Array<Uint8Array> | null = null
+  ) {
     const fromAddress = Array.from(toUint64Array(from));
     const txRequest: TransactionRequest = {
       nonce,
@@ -66,13 +80,9 @@ export class OlaSigner {
   }
 
   signMessage(message: string | Uint8Array) {
-    if (typeof message === "string" && !message.startsWith("0x")) {
-      throw Error("OlaSigner Error: Invalid message. Expected HexString or Uint8Array.");
-    }
-
-    const hexMessage = hexlify(message);
+    const _message = typeof message === "string" ? hashMessage(message) : message;
     const privKey = new SigningKey(this.privateKey);
-    return privKey.sign(hexMessage);
+    return privKey.sign(_message);
   }
 
   signTransactionRequest(tx: TransactionRequest) {
@@ -93,7 +103,12 @@ export class OlaSigner {
     return rawTx;
   }
 
-  createTransaction(chainId: number, nonce: number, calldata: Uint8Array, factory_deps: Array<Uint8Array> | null = null) {
+  createTransaction(
+    chainId: number,
+    nonce: number,
+    calldata: Uint8Array,
+    factory_deps: Array<Uint8Array> | null = null
+  ) {
     const l2tx = this.getL2Tx(chainId, this.address, nonce, calldata, factory_deps);
     return this.createSignedTransactionRaw(l2tx, chainId);
   }

@@ -12,4 +12,5 @@ export {
   toUint8Array,
   toUint64Array,
   poseidonHash,
+  hashMessage,
 } from "./utils";

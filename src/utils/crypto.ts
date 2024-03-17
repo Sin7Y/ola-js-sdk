@@ -1,6 +1,7 @@
-import { toBeArray, toBigInt } from "ethers";
+import { toBeArray, toBigInt, toUtf8Bytes, concat, keccak256 } from "ethers";
 import type { BigNumberish, BytesLike } from "ethers";
 import { poseidon_u64_bytes_for_bytes_wrapper } from "@sin7y/ola-crypto";
+import { OlaMessagePrefix } from "../constants";
 
 /**
  * BigNumberish / Uint8Array -> BigUint64Array
@@ -58,10 +59,19 @@ export function poseidonHash(data: Uint8Array) {
 }
 
 /**
-* convert HexString address -> bigint[]
-* @param address
-* @returns
-*/
+ * convert HexString address -> bigint[]
+ * @param address
+ * @returns
+ */
 export function toBigintArray(address: BytesLike) {
- return Array.from(toUint64Array(address));
+  return Array.from(toUint64Array(address));
+}
+
+export function hashMessage(message: Uint8Array | string): string {
+  if (typeof message === "string") {
+    message = toUtf8Bytes(message);
+  }
+  return keccak256(
+    concat([toUtf8Bytes(OlaMessagePrefix), toUtf8Bytes(String(message.length)), message])
+  );
 }
